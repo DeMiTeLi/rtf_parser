@@ -4,75 +4,70 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * @author Dzmitry Varabei
  */
 public class Parser_RTF {
 
-    public static List<String> readRTF() throws FileNotFoundException {
+    public static void readRTF() throws FileNotFoundException {
 
-        List<String> rtfList = new ArrayList<String>();
         Parser_RTF p = new Parser_RTF();
         FileReader rtfReader = new FileReader("c:\\Hi.rtf");
         BufferedReader bufferedRTFReader = new BufferedReader(rtfReader);
         try {
             while (true) {
+
                 String line = bufferedRTFReader.readLine();
-                p.isolationPlainText(line);
                 if (line == null) break;
-                rtfList.add(line);
+                p.isolationPlainText(line);
+
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return rtfList;
     }
 
     public void isolationPlainText(String line){
-        String controlWord = "";
-        String plainText = "";
 
+        String controlWord = "";
+        int i=0;
         char[] chars = line.toCharArray();
 
-        for (int i=0; i<chars.length; i++) {
-
-            if (chars[i] == '\\') {
-i++;
-                while (chars[i]!='\\' && chars[i]!=' '){
-
-                controlWord = controlWord + chars[i];
+        while ( i<chars.length) {
+             if (chars[i] == '\\') {
+                i++;
+                    while (chars[i]!='\\' && chars[i]!=' '){
+                    controlWord = controlWord + chars[i];
                     i++;
-            }
+                    }
 
-                if (controlWord.indexOf("insrsid",1)!=-1){
+                if (controlWord.indexOf("insrsid",0)!=-1){
 
-                    while (chars[i]!=' ') i++;
+                    i = HandlerOfControlWords.mainHandler("insrsid", chars, i);
 
-                    while (chars[i]!='}') {plainText = plainText +  chars[i]; i++; }
+                } else
+                     if (controlWord.equals("par")){
 
+                         i = HandlerOfControlWords.mainHandler("par", chars, i);
 
-                }
+                     }else
+                        if (controlWord.equals("i"))
+                            i = HandlerOfControlWords.mainHandler("i", chars, i);
+                        else
+                            if (controlWord.equals("b"))
+                                i = HandlerOfControlWords.mainHandler("b", chars, i);
+                controlWord = "";
 
-
+            }else i++;
         }
-
-        }
-
     }
 
     public static void main(String[] args) throws FileNotFoundException {
 
-        List<String> rtfFile = Parser_RTF.readRTF();
-
-        Iterator iterator = rtfFile.iterator();
-        while (iterator.hasNext()){
-
-            System.out.println(iterator.next());
-        }
+      Parser_RTF.readRTF();
+      RtfSingleton.getInstance().printText();
 
     }
 }
+
