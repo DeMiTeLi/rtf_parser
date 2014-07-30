@@ -5,43 +5,43 @@ package by.demiteli.parser;
  */
 public class HandlerOfControlWords {
 
-    static RtfSingleton text = RtfSingleton.getInstance();
+    static RtfSingleton basicText = RtfSingleton.getInstance();
 
     private int boldHandler(char[] chars, int i){
 
-        text.addText("\\b ");
+        basicText.addText("\\b ");
         String plainWord = "";
         while (chars[i]!=' ') i++;
         i++;
         while (chars[i]!='}' && i<chars.length) {plainWord = plainWord +  chars[i]; i++; }
-        text.addText(plainWord);
-        text.addText(" \\b");
+        basicText.addText(plainWord);
+        basicText.addText(" \\b");
 
         return i;
     }
 
     private int italicHandler(char[] chars, int i){
 
-        text.addText("\\i ");
+        basicText.addText("\\i ");
         String plainWord = "";
         while (chars[i]!=' ') i++;
         i++;
         while (chars[i]!='}' && i<chars.length) {plainWord = plainWord +  chars[i]; i++; }
-        text.addText(plainWord);
-        text.addText(" \\i");
+        basicText.addText(plainWord);
+        basicText.addText(" \\i");
 
         return i;
     }
 
     private int underlineHandler(char[] chars, int i){
 
-        text.addText("\\ul ");
+        basicText.addText("\\ul ");
         String plainWord = "";
         while (chars[i]!=' ') i++;
         i++;
         while (chars[i]!='}' && i<chars.length) {plainWord = plainWord +  chars[i]; i++; }
-        text.addText(plainWord);
-        text.addText(" \\ul");
+        basicText.addText(plainWord);
+        basicText.addText(" \\ul");
 
         return i;
     }
@@ -55,7 +55,7 @@ public class HandlerOfControlWords {
             plainWord = plainWord +  chars[i];
             i++;
         }
-        text.addText(plainWord);
+        basicText.addText(plainWord);
 
         return i;
     }
@@ -69,8 +69,8 @@ public class HandlerOfControlWords {
             i++;
         }
         if (plainWord != ""){
-            text.addText(" \\par ");
-            text.addText(plainWord);
+            basicText.addText(" \\par ");
+            basicText.addText(plainWord);
         }
 
        return i;

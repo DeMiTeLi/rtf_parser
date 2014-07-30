@@ -6,7 +6,7 @@ package by.demiteli.parser;
 public class RtfSingleton {
 
     private static RtfSingleton instance = null;
-    StringBuilder rtfText = null;
+    StringBuilder rtfBasicText = null;
 
     public static RtfSingleton getInstance() {
 
@@ -20,15 +20,15 @@ public class RtfSingleton {
 
     public void addText(String word){
 
-    if (rtfText == null) {
-        rtfText = new StringBuilder();
+    if (rtfBasicText == null) {
+        rtfBasicText = new StringBuilder();
 }
-    rtfText.append(word);
+    rtfBasicText.append(word);
 
     }
 
     public void printText(){
 
-        System.out.println(rtfText);
+        System.out.println(rtfBasicText);
     }
 }
