@@ -5,30 +5,31 @@ package by.demiteli.parser;
  */
 public class RtfSingleton {
 
-    private static RtfSingleton instance = null;
-    StringBuilder rtfBasicText = null;
+    private static RtfSingleton instance;
+    StringBuilder rtfBasicText;
 
     public static RtfSingleton getInstance() {
 
-    if(instance==null){
-       instance = new RtfSingleton();
-    }
-       return instance;
-}
-    private RtfSingleton(){
+        if (instance == null) {
+            instance = new RtfSingleton();
+        }
+        return instance;
     }
 
-    public void addText(String word){
+    private RtfSingleton() {
+    }
 
-    if (rtfBasicText == null) {
-        rtfBasicText = new StringBuilder();
-}
-    rtfBasicText.append(word);
+    public void addText(String word) {
+
+        if (rtfBasicText == null) {
+            rtfBasicText = new StringBuilder();
+        }
+        rtfBasicText.append(word);
 
     }
 
-    public void printText(){
+    public StringBuilder getRtfBasicText() {
+        return rtfBasicText;
 
-        System.out.println(rtfBasicText);
     }
 }

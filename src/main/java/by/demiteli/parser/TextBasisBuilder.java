@@ -10,17 +10,18 @@ import java.io.IOException;
  */
 public class TextBasisBuilder {
 
-    public void readRTF() throws FileNotFoundException {
 
-        TextBasisBuilder p = new TextBasisBuilder();
-        FileReader rtfReader = new FileReader("c:\\Hi.rtf");
+
+    public static void readRTF(String url) throws FileNotFoundException {
+
+        FileReader rtfReader = new FileReader(url);
         BufferedReader bufferedRTFReader = new BufferedReader(rtfReader);
         try {
             while (true) {
 
                 String line = bufferedRTFReader.readLine();
                 if (line == null) break;
-                p.isolationPlainText(line);
+                isolatePlainText(line);
 
             }
         } catch (IOException e) {
@@ -28,38 +29,35 @@ public class TextBasisBuilder {
         }
     }
 
-    public void isolationPlainText(String line){
+    public static void isolatePlainText(String line) {
 
         String controlWord = "";
-        int i=0;
+        int i = 0;
         char[] chars = line.toCharArray();
 
-        while ( i<chars.length) {
-             if (chars[i] == '\\') {
+        while (i < chars.length) {
+            if (chars[i] == '\\') {
                 i++;
-                    while (chars[i]!='\\' && chars[i]!=' '){
+                while (chars[i] != '\\' && chars[i] != ' ') {
                     controlWord = controlWord + chars[i];
                     i++;
-                    }
+                }
 
-                if (controlWord.indexOf("insrsid",0)!=-1){
+                if (controlWord.indexOf("insrsid", 0) != -1) {
 
                     i = HandlerOfControlWords.mainHandler("insrsid", chars, i);
 
-                } else
-                     if (controlWord.equals("par")){
+                } else if (controlWord.equals("par")) {
 
-                         i = HandlerOfControlWords.mainHandler("par", chars, i);
+                    i = HandlerOfControlWords.mainHandler("par", chars, i);
 
-                     }else
-                        if (controlWord.equals("i"))
-                            i = HandlerOfControlWords.mainHandler("i", chars, i);
-                        else
-                            if (controlWord.equals("b"))
-                                i = HandlerOfControlWords.mainHandler("b", chars, i);
+                } else if (controlWord.equals("i"))
+                    i = HandlerOfControlWords.mainHandler("i", chars, i);
+                else if (controlWord.equals("b"))
+                    i = HandlerOfControlWords.mainHandler("b", chars, i);
                 controlWord = "";
 
-            }else i++;
+            } else i++;
         }
     }
 
