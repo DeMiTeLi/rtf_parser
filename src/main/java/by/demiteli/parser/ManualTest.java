@@ -1,3 +1,6 @@
+/*
+* This class is for manual testing of application.
+* */
 package by.demiteli.parser;
 
 import java.io.IOException;
@@ -14,11 +17,11 @@ public class ManualTest {
 
         TextBasisBuilder.readRTF(inputFileName);
 
-        RtfToTxtConvertor rtfToTxtConvertor = new RtfToTxtConvertor(HandlerOfControlWords.getTextBasis());
+        RtfToTxtConvertor rtfToTxtConvertor = new RtfToTxtConvertor(ControlWordsHandler.getTextBasis());
         rtfToTxtConvertor.parse();
         rtfToTxtConvertor.write(outputTxtFile, rtfToTxtConvertor.getFinalText());
 
-        RtfToHtmlConvertor rtfToHtmlConvertor = new RtfToHtmlConvertor(HandlerOfControlWords.getTextBasis());
+        RtfToHtmlConvertor rtfToHtmlConvertor = new RtfToHtmlConvertor(ControlWordsHandler.getTextBasis());
         rtfToHtmlConvertor.parse();
         rtfToHtmlConvertor.write(outputHtmlFile, rtfToHtmlConvertor.getFinalHTML());
 

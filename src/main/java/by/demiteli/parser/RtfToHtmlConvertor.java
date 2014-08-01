@@ -1,3 +1,6 @@
+/*
+* This class is for convertion of text basis to html file.
+* */
 package by.demiteli.parser;
 
 /**

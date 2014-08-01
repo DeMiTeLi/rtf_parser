@@ -1,7 +1,10 @@
+/*
+* In this class going common process of original rtf file.
+* */
+
 package by.demiteli.parser;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -38,31 +41,23 @@ public class TextBasisBuilder {
         while (i < chars.length) {
             if (chars[i] == '\\') {
                 i++;
-                while (chars[i] != '\\' && chars[i] != ' ') {
+                while (i < chars.length && (chars[i] != ' ' && chars[i] != '\\' && chars[i] != ';'  )) {
                     controlWord = controlWord + chars[i];
                     i++;
                 }
 
                 if (controlWord.indexOf("insrsid", 0) != -1) {
-
-                    i = HandlerOfControlWords.mainHandler("insrsid", chars, i);
-
+                    i = ControlWordsHandler.mainHandler("insrsid", chars, i);
                 } else if (controlWord.equals("par")) {
-
-                    i = HandlerOfControlWords.mainHandler("par", chars, i);
-
+                    i = ControlWordsHandler.mainHandler("par", chars, i);
                 } else if (controlWord.equals("i"))
-                    i = HandlerOfControlWords.mainHandler("i", chars, i);
+                    i = ControlWordsHandler.mainHandler("i", chars, i);
                 else if (controlWord.equals("b"))
-                    i = HandlerOfControlWords.mainHandler("b", chars, i);
+                    i = ControlWordsHandler.mainHandler("b", chars, i);
                 controlWord = "";
 
             } else i++;
         }
-    }
-
-    public static StringBuilder getTextBasis(){
-        return HandlerOfControlWords.getTextBasis();
     }
 
 }
