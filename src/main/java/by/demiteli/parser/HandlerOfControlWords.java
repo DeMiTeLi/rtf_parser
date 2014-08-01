@@ -1,3 +1,6 @@
+/*
+* In this class forming an intermediate format (basisText) of original rtf file.
+* */
 package by.demiteli.parser;
 
 /**
@@ -5,11 +8,11 @@ package by.demiteli.parser;
  */
 public class HandlerOfControlWords {
 
-    static RtfSingleton basicText = RtfSingleton.getInstance();
+    static StringBuilder basicText = new StringBuilder();
 
     private int boldHandler(char[] chars, int i) {
 
-        basicText.addText("\\b ");
+        basicText.append("\\b ");
         String plainWord = "";
         while (chars[i] != ' ') i++;
         i++;
@@ -17,15 +20,15 @@ public class HandlerOfControlWords {
             plainWord = plainWord + chars[i];
             i++;
         }
-        basicText.addText(plainWord);
-        basicText.addText(" \\b");
+        basicText.append(plainWord);
+        basicText.append(" \\b");
 
         return i;
     }
 
     private int italicHandler(char[] chars, int i) {
 
-        basicText.addText("\\i ");
+        basicText.append("\\i ");
         String plainWord = "";
         while (chars[i] != ' ') i++;
         i++;
@@ -33,15 +36,15 @@ public class HandlerOfControlWords {
             plainWord = plainWord + chars[i];
             i++;
         }
-        basicText.addText(plainWord);
-        basicText.addText(" \\i");
+        basicText.append(plainWord);
+        basicText.append(" \\i");
 
         return i;
     }
 
     private int underlineHandler(char[] chars, int i) {
 
-        basicText.addText("\\ul ");
+        basicText.append("\\ul ");
         String plainWord = "";
         while (chars[i] != ' ') i++;
         i++;
@@ -49,8 +52,8 @@ public class HandlerOfControlWords {
             plainWord = plainWord + chars[i];
             i++;
         }
-        basicText.addText(plainWord);
-        basicText.addText(" \\ul");
+        basicText.append(plainWord);
+        basicText.append(" \\ul");
 
         return i;
     }
@@ -64,7 +67,7 @@ public class HandlerOfControlWords {
             plainWord = plainWord + chars[i];
             i++;
         }
-        basicText.addText(plainWord);
+        basicText.append(plainWord);
 
         return i;
     }
@@ -78,8 +81,8 @@ public class HandlerOfControlWords {
             i++;
         }
         if (plainWord != "") {
-            basicText.addText(" \\par ");
-            basicText.addText(plainWord);
+            basicText.append(" \\par ");
+            basicText.append(plainWord);
         }
 
         return i;
@@ -97,6 +100,10 @@ public class HandlerOfControlWords {
         else
 
             return 0;
+    }
+
+    public static StringBuilder getTextBasis(){
+        return basicText;
     }
 
 }

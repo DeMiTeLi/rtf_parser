@@ -10,9 +10,7 @@ import java.io.IOException;
  */
 public class TextBasisBuilder {
 
-
-
-    public static void readRTF(String url) throws FileNotFoundException {
+    public static void readRTF(String url) throws IOException {
 
         FileReader rtfReader = new FileReader(url);
         BufferedReader bufferedRTFReader = new BufferedReader(rtfReader);
@@ -26,6 +24,8 @@ public class TextBasisBuilder {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            bufferedRTFReader.close();
         }
     }
 
@@ -59,6 +59,10 @@ public class TextBasisBuilder {
 
             } else i++;
         }
+    }
+
+    public static StringBuilder getTextBasis(){
+        return HandlerOfControlWords.getTextBasis();
     }
 
 }

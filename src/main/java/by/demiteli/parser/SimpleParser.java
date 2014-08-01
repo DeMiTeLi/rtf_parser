@@ -10,15 +10,15 @@ import java.io.IOException;
  */
 public abstract class SimpleParser {
 
-    public abstract void parse(StringBuilder textBasis);
+    public abstract void parse();
 
-    public static void write(String url, StringBuilder writedFile) throws IOException {
+    public void write(String url, StringBuilder outputBuilder) throws IOException {
 
         File file = new File(url);
         FileWriter fileWriter = new FileWriter(file);
 
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        bufferedWriter.append(writedFile);
+        bufferedWriter.append(outputBuilder);
 
         bufferedWriter.close();
 

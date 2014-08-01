@@ -5,10 +5,17 @@ package by.demiteli.parser;
  */
 public class RtfToTxtConvertor extends SimpleParser {
 
+    private StringBuilder textBasis;
+
+    public RtfToTxtConvertor(StringBuilder textBasis) {
+
+        this.textBasis = textBasis;
+    }
+
     StringBuilder finalText = new StringBuilder();
 
     @Override
-    public void parse(StringBuilder textBasis) {
+    public void parse() {
 
         StringBuilder paramWord = new StringBuilder();
 
@@ -43,7 +50,7 @@ public class RtfToTxtConvertor extends SimpleParser {
         }
     }
 
-    public StringBuilder getFinalHTML() {
+    public StringBuilder getFinalText() {
         return finalText;
     }
 }

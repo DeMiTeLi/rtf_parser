@@ -14,12 +14,12 @@ public class ManualTest {
 
         TextBasisBuilder.readRTF(inputFileName);
 
-        RtfToTxtConvertor rtfToTxtConvertor = new RtfToTxtConvertor();
-        rtfToTxtConvertor.parse(RtfSingleton.getInstance().getRtfBasicText());
-        rtfToTxtConvertor.write(outputTxtFile, rtfToTxtConvertor.getFinalHTML());
+        RtfToTxtConvertor rtfToTxtConvertor = new RtfToTxtConvertor(HandlerOfControlWords.getTextBasis());
+        rtfToTxtConvertor.parse();
+        rtfToTxtConvertor.write(outputTxtFile, rtfToTxtConvertor.getFinalText());
 
-        RtfToHtmlConvertor rtfToHtmlConvertor = new RtfToHtmlConvertor();
-        rtfToHtmlConvertor.parse(RtfSingleton.getInstance().getRtfBasicText());
+        RtfToHtmlConvertor rtfToHtmlConvertor = new RtfToHtmlConvertor(HandlerOfControlWords.getTextBasis());
+        rtfToHtmlConvertor.parse();
         rtfToHtmlConvertor.write(outputHtmlFile, rtfToHtmlConvertor.getFinalHTML());
 
     }
