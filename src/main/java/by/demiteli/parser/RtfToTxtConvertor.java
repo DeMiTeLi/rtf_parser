@@ -22,7 +22,7 @@ public class RtfToTxtConvertor extends SimpleParser {
 
         StringBuilder paramWord = new StringBuilder();
 
-        for (int i = 0; i < textBasis.length(); i++) {
+        for (int i = 0; i < (textBasis.length()-5); i++) {
 
             char character = textBasis.charAt(i);
 
@@ -34,17 +34,19 @@ public class RtfToTxtConvertor extends SimpleParser {
                     i++;
                 }
 
-                if (paramWord.toString().equals("\\rquote")) {
+                String stringParamWord = paramWord.toString();
+
+                if (stringParamWord.equals("\\rquote")) {
                     finalText.append("'");
                     paramWord.delete(0, paramWord.length());
                     continue;
                 }
-                if (paramWord.toString().equals("\\par")) {
+                if (stringParamWord.equals("\\par")) {
                     finalText.append('\n');
                     paramWord.delete(0, paramWord.length());
                     continue;
                 }
-                if (paramWord.toString().equals("\\i") || paramWord.toString().equals("\\b"))
+                if (stringParamWord.equals("\\i") || paramWord.toString().equals("\\b"))
                     paramWord.delete(0, paramWord.length());
             } else
 

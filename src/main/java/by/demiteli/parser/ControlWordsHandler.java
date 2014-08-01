@@ -44,7 +44,7 @@ public class ControlWordsHandler {
 
     private int underlineHandler(char[] chars, int i) {
 
-        basicText.append("\\ul ");
+        basicText.append("\\u ");
         String plainWord = "";
         while (chars[i] != ' ') i++;
         i++;
@@ -53,7 +53,7 @@ public class ControlWordsHandler {
             i++;
         }
         basicText.append(plainWord);
-        basicText.append(" \\ul");
+        basicText.append(" \\u");
 
         return i;
     }
@@ -80,8 +80,10 @@ public class ControlWordsHandler {
             plainWord = plainWord + chars[i];
             i++;
         }
-        if (plainWord != "") {
-            basicText.append(" \\par ");
+        if (plainWord == " ")
+            basicText.append("\\par ");
+        else {
+            basicText.append("\\par ");
             basicText.append(plainWord);
         }
 

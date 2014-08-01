@@ -75,11 +75,11 @@ public class RtfToHtmlConvertor extends SimpleParser {
                     paramWord.delete(0, paramWord.length());
                     continue;
                 }
-                if (stringParamWord.equals("\\ul")) {
+                if (stringParamWord.equals("\\u")) {
                     underlineNumber++;
                     if (underlineNumber % 2 != 0)
-                        finalHTML.append("<ul>");
-                    else finalHTML.append("</ul>");
+                        finalHTML.append("<u>");
+                    else finalHTML.append("</u>");
                     paramWord.delete(0, paramWord.length());
                     continue;
                 }

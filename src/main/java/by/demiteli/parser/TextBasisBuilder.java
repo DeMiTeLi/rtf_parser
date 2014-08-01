@@ -54,6 +54,8 @@ public class TextBasisBuilder {
                     i = ControlWordsHandler.mainHandler("i", chars, i);
                 else if (controlWord.equals("b"))
                     i = ControlWordsHandler.mainHandler("b", chars, i);
+                else if (controlWord.equals("ul"))
+                    i = ControlWordsHandler.mainHandler("ul", chars, i);
                 controlWord = "";
 
             } else i++;
